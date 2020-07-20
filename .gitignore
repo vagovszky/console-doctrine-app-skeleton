@@ -1,0 +1,11 @@
+/vendor/
+composer.lock
+/nbproject/private/
+/nbproject/
+.idea
+/data/temp/
+/data/database.db
+/data/application.log
+/bin/adler.phar
+/config/application.php
+.phpunit.result.cache

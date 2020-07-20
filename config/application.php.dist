@@ -1,0 +1,50 @@
+<?php
+// Global application configuration
+return [
+    'version' => '0.0.0',
+    'debug' => false,
+    'doctrine' => [
+        'params' => [
+            'driver' => 'pdo_pgsql',
+            'port' => 5432,
+            'user' => 'dbuser',
+            'password' => 'dbpass',
+            'host' => 'localhost',
+            'dbname' => 'dbname'
+        ],
+        'entity_paths' => [
+            APPLICATION_PATH . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Entity'
+        ]
+    ],
+    'log' => [
+        'stream' => getenv('LOG_PATH') ? getenv('LOG_PATH') : APPLICATION_PATH . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'application.log'
+    ],
+    'mail' => [
+        'transport' => [
+            'options' => [
+                'host'              => 'smtp.gmail.com',
+                'connection_class'  => 'login',
+                'connection_config' => [
+                    'username' => 'xyz@gmail.com',
+                    'password' => 'passwd',
+                    'ssl' => 'tls'
+                ],
+            ],  
+        ],
+        'recipients' => [
+            'vagovszky@gmail.com'
+        ]
+    ],
+    'service_manager' => [
+        'invokables' => [
+            
+        ],
+        'factories' => [
+            Doctrine\ORM\EntityManager::class => Application\Factory\DoctrineFactory::class,
+            Application\Factory\MailTransportFactory::class => Application\Factory\MailTransportFactory::class,
+            Application\Factory\LoggerFactory::class => Application\Factory\LoggerFactory::class,
+        ]
+    ],
+    'tmp_dir' => getenv('TMP_DIR') ? getenv('TMP_DIR') : APPLICATION_PATH . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'temp'
+];
+
